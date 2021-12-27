@@ -6,7 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/littlelittlelittleboy/scriptkilling/common/response"
 	"github.com/littlelittlelittleboy/scriptkilling/constants"
-	"github.com/littlelittlelittleboy/scriptkilling/service"
 )
 
 type UserController struct{}
@@ -19,7 +18,8 @@ func (controller *UserController) Login(c *gin.Context) {
 		response.GenerErrorResponse(c, nil, int(constants.LOGIN_EMPTY_INFO), "Empty username or password")
 		return
 	}
-	userService := service.ServiceInstance.UserService
+
+	userService := ServiceInstance.UserService
 
 	status := userService.Login(username, password)
 
@@ -39,6 +39,8 @@ func (controller *UserController) Register(c *gin.Context) {
 		response.GenerErrorResponse(c, nil, int(constants.LOGIN_EMPTY_INFO), "Empty username or password")
 		return
 	}
+
+	userService := ServiceInstance.UserService
 
 	status := userService.Register(username, password)
 

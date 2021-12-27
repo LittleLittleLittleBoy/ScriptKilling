@@ -19,7 +19,7 @@ func (r RouterGroup) Init(group *gin.RouterGroup) {
 var RouterApp = RouterGroup{
 	routerList: []InitRouter{
 		&HealthCheckRouter{},
-		&AdminRouter{},
+		&ScriptCreatorRouter{},
 		&LoginRouter{},
 	},
 }
