@@ -19,9 +19,9 @@ func (r *LoginRouter) Init(group *gin.RouterGroup) {
 	}
 
 	apiRouter := group.Group("api")
-	controller := controller.Instance
 	{
-		apiRouter.POST("login", controller.User.Login)
-		apiRouter.POST("register", controller.User.Register)
+		user := controller.Instance.User
+		apiRouter.POST("login", user.Login)
+		apiRouter.POST("register", user.Register)
 	}
 }

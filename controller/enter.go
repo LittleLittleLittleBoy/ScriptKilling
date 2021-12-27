@@ -3,9 +3,11 @@ package controller
 import "github.com/littlelittlelittleboy/scriptkilling/service"
 
 type Controller struct {
-	User UserController
+	User       UserController
+	ScriptInit ScriptInitController
+	FileUpload FileUploadControler
 }
 
 var Instance = new(Controller)
 
-var userService = service.ServiceInstance.UserService
+var ServiceInstance = service.ServiceInstance

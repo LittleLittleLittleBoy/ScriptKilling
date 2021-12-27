@@ -34,7 +34,7 @@ func (s UserService) Register(username string, password string) constants.LoginS
 	}
 	count, err := db.Engine.Insert(&user)
 	if err != nil {
-		log.Printf("db error {%s}", err)
+		log.Fatal(err)
 	}
 
 	if count == 0 {
