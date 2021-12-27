@@ -3,6 +3,6 @@ package constants
 type UserType int
 
 const (
-	ADMIN = 1
-	USER  = 2
+	ADMIN UserType = 1
+	USER  UserType = 2
 )
