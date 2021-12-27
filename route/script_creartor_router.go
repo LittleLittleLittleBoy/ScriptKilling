@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/littlelittlelittleboy/scriptkilling/common/response"
 	"github.com/littlelittlelittleboy/scriptkilling/constants"
 	"github.com/littlelittlelittleboy/scriptkilling/controller"
 )
@@ -19,7 +18,9 @@ func (r *ScriptCreatorRouter) Init(group *gin.RouterGroup) {
 		fileUpload := controller.Instance.FileUpload
 		apiGroup.POST("upload", fileUpload.Upload)
 	}
-	apiGroup.GET("create", func(c *gin.Context) {
-		response.GenerResponse(c, "ok")
-	})
+	{
+		scriptInfo := controller.Instance.ScriptInit
+		apiGroup.POST("scriptInfo/add", scriptInfo.Create)
+		apiGroup.GET("scriptInfo/list", scriptInfo.List)
+	}
 }

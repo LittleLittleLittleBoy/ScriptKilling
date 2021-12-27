@@ -45,5 +45,5 @@ func (service *FileService) Save(file multipart.File, header *multipart.FileHead
 		return "", constants.UPLOAD_FILE_SAVE_ERROR
 	}
 
-	return filePath, constants.UPLOAD_FILE_SUCCESS
+	return "/" + filePath, constants.UPLOAD_FILE_SUCCESS
 }

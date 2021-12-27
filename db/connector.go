@@ -13,7 +13,7 @@ var Engine *xorm.Engine
 func InitDB(config config.MySQLConfig) error {
 	var err error
 	Engine, err = xorm.NewEngine("mysql",
-		fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8",
+		fmt.Sprintf("%s:%s@tcp(%s:%d)/%s",
 			config.User,
 			config.Password,
 			config.Host,
