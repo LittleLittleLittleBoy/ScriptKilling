@@ -1,1 +1,0 @@
-xorm reverse mysql "root:PpT5HwwzbQT2B4rW@tcp(13.88.43.250:10087)/scriptkilling?charset=utf8" xorm/
