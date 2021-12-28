@@ -13,12 +13,12 @@ import (
 type ScriptInfoService struct{}
 
 func (service *ScriptInfoService) Add(scriptInfo vo.CreateScriptRequest) (int64, constants.ScriptInfoStatus) {
-	scriptModel := &models.ScriptInfo{
+	scriptModel := models.ScriptInfo{
 		Title:      scriptInfo.Title,
 		RoleNum:    scriptInfo.RoleNum,
 		Cover:      "",
-		CreateTime: time.Time{},
-		UpdateTime: time.Time{},
+		CreateTime: time.Now(),
+		UpdateTime: time.Now(),
 	}
 
 	count, err := db.Engine.Insert(&scriptModel)
@@ -36,12 +36,15 @@ func (service *ScriptInfoService) Add(scriptInfo vo.CreateScriptRequest) (int64,
 }
 
 func (service *ScriptInfoService) List() ([]models.ScriptInfo, constants.ScriptInfoStatus) {
-	scriptInfoLst := []models.ScriptInfo{}
-	err := db.Engine.SQL("select * from script_info").Find(&scriptInfoLst)
+	var scriptInfoLst []models.ScriptInfo
+	err := db.Engine.SQL("select * from `script_info`").Find(&scriptInfoLst)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("select script info from db error, %s", err)
 		return scriptInfoLst, constants.SCRPIT_INFO_DB_ERROR
+	}
+	if scriptInfoLst == nil {
+		scriptInfoLst = []models.ScriptInfo{}
 	}
 
 	return scriptInfoLst, constants.SCRIPT_INFO_SUCCESS

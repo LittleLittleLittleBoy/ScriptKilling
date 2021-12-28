@@ -1,3 +1,4 @@
 .DS_Store
 config.yaml
 resources/*
+gener_models.sh
