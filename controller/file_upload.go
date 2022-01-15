@@ -5,6 +5,7 @@ import (
 	"github.com/littlelittlelittleboy/scriptkilling/common/response"
 	"github.com/littlelittlelittleboy/scriptkilling/common/vo"
 	"github.com/littlelittlelittleboy/scriptkilling/constants"
+	"github.com/littlelittlelittleboy/scriptkilling/constants/status"
 )
 
 type FileUploadControler struct{}
@@ -14,7 +15,7 @@ func (controller *FileUploadControler) Upload(c *gin.Context) {
 
 	if err != nil {
 		response.GenerErrorResponse(c, nil,
-			int(constants.UPLOAD_FILE_GET_FROM_REQUEST_ERROR),
+			int(status.UPLOAD_FILE_GET_FROM_REQUEST_ERROR),
 			"can not parse file from request")
 		return
 	}
@@ -23,10 +24,10 @@ func (controller *FileUploadControler) Upload(c *gin.Context) {
 
 	fileService := ServiceInstance.FileService
 
-	filePath, status := fileService.Save(file, header, scriptName)
-	if status != constants.UPLOAD_FILE_SUCCESS {
+	filePath, result := fileService.Save(file, header, scriptName)
+	if result != status.UPLOAD_FILE_SUCCESS {
 		response.GenerErrorResponse(c, nil,
-			int(constants.UPLOAD_FILE_SAVE_ERROR),
+			int(result),
 			"save to disk error")
 		return
 	}

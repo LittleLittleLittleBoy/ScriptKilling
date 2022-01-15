@@ -24,5 +24,7 @@ func (r *ScriptCreatorRouter) Init(group *gin.RouterGroup) {
 		apiGroup.GET("scriptInfo/list", scriptInfo.List)
 		apiGroup.POST("scriptInfo/addPerson", scriptInfo.AddPerson)
 		apiGroup.GET("scriptInfo/listPerson", scriptInfo.ListAllPersons)
+		apiGroup.POST("scriptInfo/addInformation", scriptInfo.AddInformation)
+		apiGroup.GET("scriptInfo/listInformation", scriptInfo.ListAllInformation)
 	}
 }

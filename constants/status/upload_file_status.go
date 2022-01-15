@@ -1,4 +1,4 @@
-package constants
+package status
 
 type UploadFileStatus int
 

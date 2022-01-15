@@ -10,12 +10,13 @@ import (
 	"strings"
 
 	"github.com/littlelittlelittleboy/scriptkilling/constants"
+	"github.com/littlelittlelittleboy/scriptkilling/constants/status"
 	uuid "github.com/satori/go.uuid"
 )
 
 type FileService struct{}
 
-func (service *FileService) Save(file multipart.File, header *multipart.FileHeader, scriptName string) (string, constants.UploadFileStatus) {
+func (service *FileService) Save(file multipart.File, header *multipart.FileHeader, scriptName string) (string, status.UploadFileStatus) {
 	fileExt := path.Ext(header.Filename)
 	fileName := strings.ReplaceAll(uuid.NewV4().String(), "-", "_")
 
@@ -29,21 +30,21 @@ func (service *FileService) Save(file multipart.File, header *multipart.FileHead
 
 	filePath := fmt.Sprintf("%s/%s%s", fileBasePath, fileName, fileExt)
 	if _, err := os.Stat(filePath); err == nil {
-		return "", constants.UPLOAD_FILE_EXIST
+		return "", status.UPLOAD_FILE_EXIST
 	}
 
 	out, err := os.Create(filePath)
 	if err != nil {
 		log.Fatal(err)
-		return "", constants.UPLOAD_FILE_SAVE_ERROR
+		return "", status.UPLOAD_FILE_SAVE_ERROR
 	}
 	defer out.Close()
 
 	_, err = io.Copy(out, file)
 	if err != nil {
 		log.Fatal(err)
-		return "", constants.UPLOAD_FILE_SAVE_ERROR
+		return "", status.UPLOAD_FILE_SAVE_ERROR
 	}
 
-	return "/" + filePath, constants.UPLOAD_FILE_SUCCESS
+	return "/" + filePath, status.UPLOAD_FILE_SUCCESS
 }
