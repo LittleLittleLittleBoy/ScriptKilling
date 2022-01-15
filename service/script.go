@@ -36,13 +36,13 @@ func (service *ScriptInfoService) Add(scriptInfo vo.CreateScriptRequest) (int64,
 }
 
 func (service *ScriptInfoService) List() ([]models.ScriptInfo, constants.ScriptInfoStatus) {
-	scriptInfoLst := make([]models.ScriptInfo, 0)
-	err := db.Engine.SQL("select * from `script_info`").Find(&scriptInfoLst)
+	scriptInfoList := make([]models.ScriptInfo, 0)
+	err := db.Engine.SQL("select * from `script_info`").Find(&scriptInfoList)
 
 	if err != nil {
 		log.Fatalf("select script info from db error, %s", err)
-		return scriptInfoLst, constants.SCRPIT_INFO_DB_ERROR
+		return scriptInfoList, constants.SCRPIT_INFO_DB_ERROR
 	}
 
-	return scriptInfoLst, constants.SCRIPT_INFO_SUCCESS
+	return scriptInfoList, constants.SCRIPT_INFO_SUCCESS
 }
