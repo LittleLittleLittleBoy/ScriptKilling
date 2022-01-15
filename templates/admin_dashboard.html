@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="js/getUrlParam.js"></script>
+    <script>
+        var sid = getUrlParam("sid")
+        if (sid === null){
+            alert("sid is empty")
+        }
+    </script>
+</head>
+<body>
+    <div style="position: fixed;left: 0;background-color:bisque;width: 80%;">
+        <ul id="roleList"></ul>
+        <script type="text/javascript">
+            $.get(`/api/admin/scriptInfo/listPerson?sid=${sid}`,function(data,status){
+                if(data.code!=0){
+                    alert(data.msg)
+                    return
+                }
+                data.data.forEach(role => {
+                    $("#roleList").append(
+                        `<li><a href="/web/admin_dashboard.html?sid=${role.rid}">${role.name}</a></li>`
+                    )
+                });
+            });
+        </script>
+    </div>
+    <div style="position: fixed;right: 0;background-color: aqua;width: 20%;">
+        <h1>hi</h1>
+    </div>
+    
+</body>

@@ -29,7 +29,7 @@ func main() {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
-	r.LoadHTMLGlob("templates/*")
+	// r.LoadHTMLGlob("templates/*.html")
 	group := r.Group("")
 	route.RouterApp.Init(group)
 	// 3.监听端口，默认在8080

@@ -21,5 +21,6 @@ var RouterApp = RouterGroup{
 		&HealthCheckRouter{},
 		&ScriptCreatorRouter{},
 		&LoginRouter{},
+		&HTMLRouter{},
 	},
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>剧本目录</h1>
+    <ul id="scriptList"></ul>
+    <script type="text/javascript">
+        $.get("/api/admin/scriptInfo/list",function(data,status){
+            if(data.code!=0){
+                alert(data.msg)
+                return
+            }
+            data.data.forEach(script => {
+                $("#scriptList").append(
+                    `<li><a href="/web/admin_dashboard.html?sid=${script.sid}">${script.title}</a></li>`
+                )
+            });
+        });
+    </script>
+</body>
